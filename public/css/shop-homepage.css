@@ -1,0 +1,68 @@
+/*!
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+.minimalno{
+     min-height: 700px;
+     margin: 0px auto;
+}
+
+.about{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 500px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.companies{
+    width: 200px;
+    height: 200px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.nounderline{text-decoration: none !important}
+
+.dropdown a:hover {background-color: #ddd}
+
+.width-height{
+    width: 200px;
+    height: 150px;
+}
+.height-prostor{
+    height: 350px;
+}
+.img-size {
+    width: 50px;
+    height: 50px;
+}
