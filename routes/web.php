@@ -12,5 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.home');
+});
+
+Route::get('/about', "Pages@about");
+
+Route::get('/partners', "Pages@partners");
+
+Route::get('/author', "Pages@author");
+
+Route::get('/contact', "Pages@contact");
+
+Route::get('/adm', function () {
+    return view('layouts.admin');
 });
