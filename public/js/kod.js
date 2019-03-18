@@ -34,15 +34,24 @@ $(document).ready(function() {
 //       alert(genre);
 //    });
     
-    $('.price').on('click', function(){
+    $('.category').on('click', function(){
  
         
-        var price = $(this).val();
-        var url = baseAddress + 'sort-by-price/' +  price;
- 
-        $.get(url, function(data){
-            $('.games').html(data);
-      
+        var category = $(this).val();
+        var url = baseAddress + 'category';
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: { id: category},
+            success: function(data)
+            {
+               $('.games').html(data);
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+
         });
     });
     
@@ -64,27 +73,42 @@ $(document).ready(function() {
     $('body').on('click', '.pagination a', function(e){
  
         e.preventDefault();
-        $('#prva').hide();
         var url = $(this).attr('href');
-        document.getElementById("search").style.display = "none";
+        console.log(url);
         $.get(url, function(data){
             $('.games').html(data);
       
         });
     });
     
-    $('#searchBox').one('click', function(){
-       var url = baseAddress + 'search';
- 
-        $.get(url, function(data){
-            $('#search').html(data);
+    // $('#searchBox').one('click', function(){
+    //    var url = baseAddress + 'search';
+    //     var data = $(this).val();
+    //     alert(data);
+    //     // $.get(url, function(data){
+    //     //     console.log(data);
+    //     //     $('#search').html(data);
       
-        });
-    });
+    //     // });
+    // });
     
     $("#searchBox").keyup(function() {
-        filter();
-        document.getElementById("search").style.display = "block";
+        var url = baseAddress + 'search';
+        var data = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: { name: data},
+            success: function(data)
+            {
+                $('#src').html(data);
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+
+        });
     });
     
     $('.galery').on('click', function(){
