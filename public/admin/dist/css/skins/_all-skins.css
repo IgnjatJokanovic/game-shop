@@ -8,6 +8,13 @@
 .skin-blue .main-header .navbar .nav > li > a {
   color: #ffffff;
 }
+
+.margin{
+  margin-top: 20 !important;
+}
+.m-left{
+  margin-left: 20 !important;
+}
 .skin-blue .main-header .navbar .nav > li > a:hover,
 .skin-blue .main-header .navbar .nav > li > a:active,
 .skin-blue .main-header .navbar .nav > li > a:focus,

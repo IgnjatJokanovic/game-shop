@@ -24,11 +24,16 @@
               <a class="nav-link" href="{{asset("/")}}contact">Contact<span class="sr-only">(current)</span></a>
             </li>
               
-
-        @if(session()->has('user') && session()->get('user')[0]->naziv_uloga == 'admin')
+       
+        @if(session()->has('user') && session('user')->role == 'admin')
             <li class="nav-item">
-                <a class="nav-link" href="{{ asset('/admin-panel') }}">Amin Pannel</a>
+                <a class="nav-link" href="{{ asset('/dashboard') }}">Dashboard</a>
               </li>
+        @endif
+        @if(session()->has('user'))
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/logout') }}">Dashboard</a>
+          </li>
         @endif
     </ul>
      </div>
@@ -47,8 +52,16 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>-->
+    <div class="col-sm-2">
+        <div class="search_box pull-right dropdown">
+          <input  class="srch" id="searchBox" type="search" placeholder="Search"/>
+          <ul class="sub-menu dropdown-content" id="src">
+             
+          </ul>
+        </div>
+    </div>
 
-    <div class="dropdown">
+    {{-- <div class="dropdown">
          <input class="form-control mr-sm-2" id="searchBox" type="text" placeholder="Search">
 <!--  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    
@@ -59,7 +72,7 @@
             
        
     
-  </div>
+  </div> --}}
 
 </div>
     @if(session()->has('user'))
