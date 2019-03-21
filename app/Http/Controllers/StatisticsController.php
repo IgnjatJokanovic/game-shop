@@ -7,29 +7,36 @@ use App\models\Genre;
 use App\models\Game;
 use App\models\Activity;
 use App\models\Info;
-Use App\models\Page;
+use App\models\Page;
+use App\models\User;
 class StatisticsController extends Controller
 {
     public function orders()
     {
-        return view('pages.orders');
+        $users = User::with('history', 'games')->get();
+        // $reviews = count($users->games);
+        // $orders = count($users->history);
+        return view('pages.orders')->with(['users' => $users]);
 
     }
 
     public function logins()
     {
-        return view('pages.logins');
+        $users = User::with('history', 'games')->get();
+        return view('pages.logins')->with(['users' => $users]);
 
     }
 
     public function registrations()
     {
-        return view('pages.registrations');
+        $users = User::with('history', 'games')->get();
+        return view('pages.registrations')->with(['users' => $users]);
     }
 
     public function reviews()
     {
-        return view('pages.reviews');
+        $users = User::with('history', 'games')->get();
+        return view('pages.reviews')->with(['users' => $users]);
     }
 
     public function categories()

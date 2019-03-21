@@ -25,3 +25,8 @@
 
    
 @endsection
+
+@section('documentation')
+<a class="btn btn-light" href="{{asset('/download')}}">Documentation</a>>
+
+@endsection

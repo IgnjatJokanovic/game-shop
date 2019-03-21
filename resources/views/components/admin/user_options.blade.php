@@ -3,7 +3,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>33</h3>
 
               <p>Total Orders</p>
             </div>
@@ -32,7 +32,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{count($users)}}</h3>
 
               <p>User Registrations</p>
             </div>
@@ -47,7 +47,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+            <h3>42</h3>
 
               <p>User Reviews</p>
             </div>

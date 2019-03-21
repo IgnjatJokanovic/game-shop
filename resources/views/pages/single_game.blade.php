@@ -81,7 +81,17 @@
                     </h5>
 
                     <h5 class="cena">Price: &dollar;{{$game->price}}</h5>
-                    <h5>Rating: <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span></h5>
+                    <h5>Rating: 
+                      
+                      @if($rating == 0)
+                        Not yet rated
+                      @else
+                        @for($i = 0; $i < $rating; $i++)
+                        <span>☆
+                        @endfor
+                      
+                      @endif
+                    </h5>
 <!--                  <h5>Rate this game:</h5>
                   <form action="ocena" method="POST">
                      <div class="form-row">
@@ -103,27 +113,30 @@
                         </div>
                     </div>
                  </form>-->
-
+                 <script>
+                   const ID = "{{$game->id}}";
+                  </script>
                  <div class="rating-system2">
                         <h3>Rate this game</h3>
-                        <input class="input rate-movie" type="radio" value="5" name='rate2' id="star5_2" />
+                        <input class="input rate-game" type="radio" value="5" name='rate2' id="star5_2" />
                         <label class="labela" for="star5_2"></label>
                     
-                        <input class="input rate-movie" type="radio" value="4" name='rate2' id="star4_2" />
+                        <input class="input rate-game" type="radio" value="4" name='rate2' id="star4_2" />
                         <label  class="labela" for="star4_2"></label>
                     
-                        <input class="input rate-movie" type="radio" value="3" name='rate2' id="star3_2" />
+                        <input class="input rate-game" type="radio" value="3" name='rate2' id="star3_2" />
                         <label  class="labela" for="star3_2"></label>
                     
-                        <input class="input rate-movie" type="radio" value="2" name='rate2' id="star2_2" />
+                        <input class="input rate-game" type="radio" value="2" name='rate2' id="star2_2" />
                         <label  class="labela" for="star2_2"></label>
                     
-                        <input class="input rate-movie" type="radio" value="1" name='rate2' id="star1_2" />
+                        <input class="input rate-game" type="radio" value="1" name='rate2' id="star1_2" />
                         <label  class="labela" for="star1_2"></label>
                         
-                        <div class="text"></div>
+                        
                     
                 </div>
+                <div class="text"></div>
                 </div>
                 <div class="card-footer">
                     <button class="dodaj btn btn-outline-success center-block" value="{{$game->id}}">

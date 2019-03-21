@@ -35,11 +35,6 @@
             <label class="form-check-label" for="exampleCheck1">{{$c->name}}</label>
             </div>
             @endforeach
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Kategorija2</label>
-              </div>
-            <button type="submit" class="btn btn-primary">Insert</button>
           </form>
       </section>
       <!-- /.Left col -->

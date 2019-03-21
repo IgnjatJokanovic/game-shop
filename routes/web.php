@@ -22,63 +22,91 @@ Route::get('/author', "Pages@author");
 
 Route::get('/contact', "Pages@contact");
 
-Route::get('/game/{id}', 'Games@show');
+Route::get('/game/show/{id}', 'Games@show');
 
 Route::get('/search', 'Games@search');
 
 Route::get('/category', 'Games@perCategory');
 
 Route::post('/sendMail', 'Pages@sendMail');
+
+Route::post('/register', 'UsersController@store');
+
+Route::get('/activate/{hash}', 'UsersController@activate');
+
+Route::post('/login', 'UsersController@login');
+
+Route::get('/logout', 'UsersController@logout');
+
+Route::get('/rate', 'UsersController@rate');
+
+Route::get('/add-to-cart', 'UsersController@addToCart');
+
+Route::get('/showCart', 'UsersController@showCart');
+
+Route::get('/remove-item', 'UsersController@removeItem');
+
+Route::get('/update-numbers', 'UsersController@updateNumber');
+
+Route::get('/checkout', 'UsersController@checkout');
+
+Route::get('/download', 'UsersController@getDownload');
 ##ADMIN###
-Route::get('/dashboard', 'StatisticsController@orders');
 
-Route::get('/logins', 'StatisticsController@logins');
+Route::middleware('check-role')->group(function(){
 
-Route::get('/registrations', 'StatisticsController@registrations');
+    Route::get('/dashboard', 'StatisticsController@orders');
 
-Route::get('/reviews', 'StatisticsController@reviews');
+    Route::get('/logins', 'StatisticsController@logins');
 
-Route::get('/game/insert', 'Games@insert');
+    Route::get('/registrations', 'StatisticsController@registrations');
 
-Route::post('/game/store', 'Games@store');
+    Route::get('/reviews', 'StatisticsController@reviews');
 
-Route::get('/game/combo', 'Games@combo');
+    Route::get('/game/insert', 'Games@insert');
 
-Route::post('/game/delete', 'Games@delete');
+    Route::post('/game/store', 'Games@store');
 
-Route::get('/game/update/{id}', 'Games@edit');
+    Route::get('/game/combo', 'Games@combo');
 
-Route::post('/game/updateBasic', 'Games@updateBasic');
+    Route::post('/game/delete', 'Games@delete');
 
-Route::post('/game/updateGalery', 'Games@updateGalery');
+    Route::get('/game/update/{id}', 'Games@edit');
 
-Route::post('/game/UpdateCategory', 'Games@UpdateCategory');
+    Route::post('/game/updateBasic', 'Games@updateBasic');
 
-Route::post('/game/updateImage', 'Games@updateImage');
+    Route::post('/game/updateGalery', 'Games@updateGalery');
 
-Route::get('/game/activity', 'StatisticsController@games');
+    Route::post('/game/UpdateCategory', 'Games@UpdateCategory');
 
-Route::get('/pages/combo', 'Pages@combo');
+    Route::post('/game/updateImage', 'Games@updateImage');
 
-Route::get('/page/update/{id}', 'Pages@edit');
+    Route::get('/game/activity', 'StatisticsController@games');
 
-Route::post('/page/updateImage', 'Pages@updateImage');
+    Route::get('/pages/combo', 'Pages@combo');
 
-Route::post('/page/updateContent', 'Pages@updateContent');
+    Route::get('/page/update/{id}', 'Pages@edit');
 
-Route::get('/page/activity', 'StatisticsController@pages');
+    Route::post('/page/updateImage', 'Pages@updateImage');
 
-Route::get('/category/insert', 'Category@insert');
+    Route::post('/page/updateContent', 'Pages@updateContent');
 
-Route::post('/category/store', 'Category@store');
+    Route::get('/page/activity', 'StatisticsController@pages');
 
-Route::get('/category/combo', 'Category@combo');
+    Route::get('/category/insert', 'Category@insert');
 
-Route::post('/category/delete', 'Category@destroy');
+    Route::post('/category/store', 'Category@store');
 
-Route::post('/category/update', 'Category@update');
+    Route::get('/category/combo', 'Category@combo');
 
-Route::get('/category/activity', 'StatisticsController@categories');
+    Route::post('/category/delete', 'Category@destroy');
+
+    Route::post('/category/update', 'Category@update');
+
+    Route::get('/category/activity', 'StatisticsController@categories');
+    
+});
+
 
 
 ##ADMIN##
