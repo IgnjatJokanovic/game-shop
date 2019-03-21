@@ -1,9 +1,9 @@
 
     <footer class="py-5 bg-dark">
         
-        @if(session()->has('user') && session()->get('user')[0]->naziv_uloga == 'admin')
-        <a href="{{asset('/download')}}">Documentation</a>>
-        @endif
+        @yield('documentation')
+       
+        
     
       <div class="container">
         <p class="m-0 text-center text-white">&copy; Ignjat Jokanovic 311/16</p>

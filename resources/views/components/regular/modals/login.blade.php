@@ -12,26 +12,15 @@
                         {{csrf_field()}}
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" id="uname" name="username" type="text" placeholder="Enter username">
-                        <p class="text-danger" name="error"></p>
+                        <input class="form-control" id="luname" name="lusername" type="text" placeholder="Enter username">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="form-control" id="pass" name="password" type="password" placeholder="Enter password">
-                        <p class="text-danger" name="error"></p>
+                        <input class="form-control" id="lpass" name="lpassword" type="password" placeholder="Enter password">
+                        
                     </div>
                         <div id="errAjax">
-                            @isset($errors)
-                                @if($errors->any())
-                                @foreach($errors->all() as $error)
-                                <p class="text-danger">{{ $error }}</p>
-                                @endforeach
-                                @endif
-                            @endisset
                             
-                            @empty(!session('error'))
-                                <p class="text-danger">{{session('error')}}</p>
-                            @endempty
                         
                                 
                         

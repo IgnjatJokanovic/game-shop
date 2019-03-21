@@ -13,7 +13,7 @@
 <form action="{{url('/sendMail')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Example textarea</label>
+                  
                   <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Send</button>

@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
     var qvty = localStorage.getItem('aaa');
+    //localStorage.removeItem('aaa');
     $('#cartSum').html(qvty);
     
 //   alert(baseAddress);
@@ -64,6 +65,26 @@ $(document).ready(function() {
         $.get(url, function(data){
             $('.games').html(data);
       
+        });
+    });
+
+    $('.rate-game').on('click', function(){
+        var grade = $(this).val()
+        var id = ID;
+        $.ajax({
+            type: 'GET',
+            url: baseAddress + 'rate',
+            data: { grade: grade, id: id },
+            success: function(data)
+            {
+                console.log(data);
+                $('.text').html(data);
+
+            },
+            error: function(data)
+            {
+                $('.text').html(JSON.parse(data.responseText));
+            }
         });
     });
     
@@ -189,7 +210,7 @@ $(document).on('click', '.brisanjeKorpa', function(){
     var id = (this).value;
     $.ajax({
           type: 'GET',
-          url: baseAddress + 'removeCart',
+          url: baseAddress + 'remove-item',
           data: {id: id},
           success: function (data, textStatus, jqXHR) {
               //alert(data);
@@ -204,7 +225,7 @@ $(document).on('click', '.brisanjeKorpa', function(){
        
     $.ajax({
           type: 'GET',
-          url: baseAddress + 'showItems',
+          url: baseAddress + 'update-numbers',
           success: function (data, textStatus, jqXHR) {
               //alert(data);
               
@@ -219,27 +240,66 @@ $(document).on('click', '.brisanjeKorpa', function(){
    
 });
 
-
-
-$(document).on('click', '.dodaj', function(){
-    
-        var niz = (this).value;
-       // alert(niz);
-       $.ajax({
+$(document).on('click', '#buy', function(e){
+   
+       e.preventDefault();
+    $.ajax({
           type: 'GET',
-          url: baseAddress + 'addCart',
-          data: {niz: niz},
+          url: baseAddress + 'checkout',
           success: function (data, textStatus, jqXHR) {
-              //alert(data);
+             
+              localStorage.removeItem('aaa');
+              $('#checkout').html(data);
               
-              localStorage.setItem('aaa', data);
-              var qvty = localStorage.getItem('aaa');
-                $('#cartSum').html(qvty);
           },
           error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR + '</br>' + textStatus + '</br>' + errorThrown);
+                
           }
        });
+   
+});
+
+$(document).on('click', '.close-err', function(){
+    $('#errCart').hide();
+});
+$(document).on('click', '.dodaj', function(){
+    
+        var id = (this).value;
+        $.ajax({
+            type: 'GET',
+            url: baseAddress + 'add-to-cart',
+            data: { id: id},
+            success: function(data)
+            {
+                localStorage.setItem('aaa', data);
+                var qvty = localStorage.getItem('aaa');
+                $('#cartSum').html(qvty);
+
+            },
+            error: function(data)
+            {
+               
+                $('#fdb').html(JSON.parse(data.responseText));
+                $('#errCart').show();
+               
+            }
+        });
+       // alert(niz);
+    //    $.ajax({
+    //       type: 'GET',
+    //       url: baseAddress + 'addCart',
+    //       data: {niz: niz},
+    //       success: function (data, textStatus, jqXHR) {
+    //           //alert(data);
+              
+    //           localStorage.setItem('aaa', data);
+    //           var qvty = localStorage.getItem('aaa');
+    //             $('#cartSum').html(qvty);
+    //       },
+    //       error: function (jqXHR, textStatus, errorThrown) {
+    //             alert(jqXHR + '</br>' + textStatus + '</br>' + errorThrown);
+    //       }
+    //    });
       
        // alert(niz);
 //        $.ajax({
@@ -263,32 +323,74 @@ $(document).on('click', '.dodaj', function(){
 
 
 $('#btnRegister').on('click', function(e){
-      // e.preventDefault();
-       //e.preventDefault();
-       if(regCheck() == false){
+       e.preventDefault();
+       var errors = Array();
+       var txt = '';
+       var regexMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       var regexMulti = /^[A-Za-z0-9]{3,}$/;
+       var mail = $('#reEmail').val();
+       var uname = $('#reUname').val();
+       var pass = $('#rePass').val();
+       if(mail == '')
+       {
+        errors.push('Email field is required');
+       }
+       if(mail != '' && !mail.match(regexMail))
+       {
+        errors.push('Email field must be a valid email');
+       }
+       if(uname == '')
+       {
+        errors.push('Username field is required');
+       }
+       if(uname != '' && !uname.match(regexMulti))
+       {
+        errors.push('Username field Must be atleast 3 characters long and contain letters and number only');
+       }
+       if(pass == '')
+       {
+        errors.push('Username field is required');
+       }
+       if(pass != '' && !pass.match(regexMulti))
+       {
+        errors.push('Password field Must be atleast 3 characters long and contain letters and number only');
+       }
+       if(errors.length != 0)
+       {
+           $.each(errors, function(i, val){
+            txt += '<div class="alert alert-danger">'+ val +'</div>';
+           });
+           $('#errAjax1').html(txt);
+
+       }
+       else{
+
+           $.ajax({
+            type: 'POST',
+            url: baseAddress + 'register',
+            data: { _token: token, email: mail, username: uname, password: pass },
+            success: function(data)
+            {
+                var response = '<div class="alert alert-success">'+ data +'</div>';
+                $('#errAjax1').html(response);
+
+            },
+            error: function(data)
+            {
+                //console.log(data.responseJSON);
            
-           e.preventDefault();
-//           var uname = document.getElementById('uname').value;
-//           var pass = document.getElementById('pass').value;
-//           $.ajax({
-//               type: 'POST',
-//               url: baseAddress + 'login',
-//               data: {username: uname, password: pass, _token: tokken},
-//               success: function (data, textStatus, jqXHR) {
-//                    console.log(data);
-//                    //window.location.href = data;
-//               },
-//               error: function (data) {
-//                   console.log(data);
-////                    var display = "";
-////                    $.each(data, function(key, value){
-////                        display += '<p class="text-danger">' + value.errors + '</p>';
-////                    });
-////                    document.getElementById('#errAjax').innerHTML = display;
-//               }
-//                
-//           });
-//       }
+                var errorz = JSON.parse(data.responseText);
+                
+                //console.log(errorz)
+                var response = '';
+                $.each(data.responseJSON.errors, function(i, val){
+                    response+= `<div class="alert alert-danger">${val}</div>`;
+                });
+                $('#errAjax1').html(response);
+
+            }
+           });
+
        }
        
     });
@@ -299,34 +401,60 @@ $('#btnRegister').on('click', function(e){
     
     
     $('#loginSub').on('click', function(e){
-      // e.preventDefault();
-       
-       if(loginCheck() == false){
-           
-           e.preventDefault();
-//           var uname = document.getElementById('uname').value;
-//           var pass = document.getElementById('pass').value;
-//           $.ajax({
-//               type: 'POST',
-//               url: baseAddress + 'login',
-//               data: {username: uname, password: pass, _token: tokken},
-//               success: function (data, textStatus, jqXHR) {
-//                    console.log(data);
-//                    //window.location.href = data;
-//               },
-//               error: function (data) {
-//                   console.log(data);
-////                    var display = "";
-////                    $.each(data, function(key, value){
-////                        display += '<p class="text-danger">' + value.errors + '</p>';
-////                    });
-////                    document.getElementById('#errAjax').innerHTML = display;
-//               }
-//                
-//           });
-//       }
+       e.preventDefault();
+       var errors = Array();
+       var txt = '';
+       var regexx = /^[A-Za-z0-9]{3,}$/;
+       var uname = $('#luname').val();
+       var pass = $('#lpass').val();
+       if(uname == '')
+       {
+        errors.push('Username field is required');
        }
+       if(uname != '' && !uname.match(regexx))
+       {
+        errors.push('Username field Must be atleast 3 characters long and contain letters and number only');
+       }
+       if(pass == '')
+       {
+        errors.push('Username field is required');
+       }
+       if(pass != '' && !pass.match(regexx))
+       {
+        errors.push('Password field Must be atleast 3 characters long and contain letters and number only');
+       }
+       if(errors.length != 0)
+       {
+           $.each(errors, function(i, val){
+            txt += '<div class="alert alert-danger">'+ val +'</div>';
+           });
+           $('#errAjax').html(txt);
+
+       }
+       else{
+
+           $.ajax({
+            type: 'POST',
+            url: baseAddress + 'login',
+            data: { _token: token, username: uname, password: pass },
+            success: function(data)
+            {
+                location.reload();
+
+            },
+            error: function(data)
+            {
+                var response = `<div class="alert alert-danger">${JSON.parse(data.responseText)}</div>`;
+                $('#errAjax').html(response);
+
+            }
+           });
+
+       }
+
+
        
+   
     });
 //    $("#searchBox").blur(function(e) {
 //        

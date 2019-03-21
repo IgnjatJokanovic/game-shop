@@ -18,11 +18,13 @@
               </tr>
           </thead>
           <tbody>
+            @foreach($users as $user)
               <tr>
-                  <td>1</td>
-                  <td>Thomas Hardy</td>
-                  <td>DATUM</td>
-              </tr>     
+              <td>{{$loop->index}}</td>
+              <td>{{$user->username}}</td>
+                  <td>{{$user->created_at}}</td>
+              </tr>
+              @endforeach    
           </tbody>
       </table>
       </section>

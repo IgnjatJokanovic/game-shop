@@ -29,8 +29,23 @@ class Games extends Controller
     public function show($id)
     {
 
-        $game = Game::where('id', $id)->with('images', 'genres')->first();
-        return view("pages.single_game")->with(['game'=>$game]);
+        $game = Game::where('id', $id)->with('images', 'genres', 'users')->first();
+        if(!$game->users->isEmpty())
+        {
+            $sum = 0;
+            foreach($game->users as $r)
+            {
+                $sum += $r->pivot->grade;
+            }
+            $rating = round($sum/count($game->users));
+
+        }
+        else
+        {
+            $rating = 0;
+        }
+       
+        return view("pages.single_game")->with(['game'=>$game, 'rating' => $rating]);
 
     }
 

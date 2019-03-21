@@ -25,16 +25,12 @@
             </li>
               
        
-        @if(session()->has('user') && session('user')->role == 'admin')
+        @if(session()->has('user') && session('user')->role->name == 'admin')
             <li class="nav-item">
                 <a class="nav-link" href="{{ asset('/dashboard') }}">Dashboard</a>
               </li>
         @endif
-        @if(session()->has('user'))
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/logout') }}">Dashboard</a>
-          </li>
-        @endif
+        
     </ul>
      </div>
 <!--    <form class="form-inline my-2 ml-3" method="GET" action="bla.php">

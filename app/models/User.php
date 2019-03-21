@@ -15,4 +15,14 @@ class User extends Model
     {
         return $this->belongsToMany(Game::class, 'user_game')->withPivot('grade');
     }
+
+    public function cart()
+    {
+        return $this->belongsToMany(Game::class, 'cart');
+    }
+
+    public function history()
+    {
+        return $this->belongsToMany(Game::class, 'buy_histories');
+    }
 }

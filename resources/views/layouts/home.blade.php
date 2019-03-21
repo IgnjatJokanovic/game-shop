@@ -7,11 +7,12 @@
 
     <!-- Navigation -->
     @include('components.regular.nav')
-    
+    @include('components.regular.modals.cart')
     @include('components.regular.modals.login')
     @include('components.regular.modals.register')
     @include('components.regular.modals.login')
-    
+
+    @include('components.regular.modals.cartError')
     
     
 
